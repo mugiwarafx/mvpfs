@@ -20,11 +20,11 @@ Product.init(
       allowNull: false,
     },
     productAmountAvailable: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     productCost: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     productUploadedAt: {
