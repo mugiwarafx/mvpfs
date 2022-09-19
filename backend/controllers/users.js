@@ -75,15 +75,19 @@ router.put('/buy/:id', tokenIsValid, sessionIsValid, async (req, res) => {
   }
 
   const product = await Product.findByPk(body.productId)
-  let total = 0
 
   if (body.amount > product.productAmountAvailable) {
     return res.status(400).json({ error: 'not enough stock' })
   }
 
+  let total = 0
   total = body.amount * product.productCost
 
   const user = await User.findByPk(req.params.id)
+
+  if (user.userRole !== 'buyer') {
+    return res.status(400).json({ error: 'user is not a buyer' })
+  }
 
   if (user.userDeposite < total) {
     return res.status(400).json({ error: 'not enough money' })
