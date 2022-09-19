@@ -1,4 +1,10 @@
 node_modules
+
 .env
+
 *.md
-queries
+!README.md
+
+data/queries/*
+!data/queries/create.sql
+!data/queries/insert.sql
