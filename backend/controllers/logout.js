@@ -10,8 +10,8 @@ router.delete('/', tokenIsValid, async (req, res) => {
 
   await Session.destroy({
     where: {
-      sessionUserId: user.userId,
-      sessionValue: req.get('authorization').substring(7),
+      userId: user.id,
+      value: req.get('authorization').substring(7),
     },
   })
 

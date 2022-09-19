@@ -6,28 +6,28 @@ class User extends Model {}
 
 User.init(
   {
-    userId: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    userUsername: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userPassword: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userRole: {
+    role: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userDeposite: {
+    deposite: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    userCreatedAt: {
+    createdAt: {
       type: 'TIMESTAMP',
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false,

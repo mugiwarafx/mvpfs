@@ -6,28 +6,28 @@ class Product extends Model {}
 
 Product.init(
   {
-    productId: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    productSellerId: {
+    sellerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    productName: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    productAmountAvailable: {
+    amountAvailable: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    productCost: {
+    cost: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    productUploadedAt: {
+    uploadedAt: {
       type: 'TIMESTAMP',
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       allowNull: false,

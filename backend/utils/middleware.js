@@ -24,7 +24,7 @@ const tokenIsValid = async (req, res, next) => {
 
 const sessionIsValid = async (req, res, next) => {
   const session = await Session.findOne({
-    where: { sessionValue: req.get('authorization').substring(7) },
+    where: { value: req.get('authorization').substring(7) },
   })
 
   if (!session) {
@@ -41,22 +41,25 @@ const sessionIsValid = async (req, res, next) => {
     id = parseInt(req.params.id)
   }
 
-  if (id !== session.sessionUserId) {
+  if (id !== session.userId) {
     return res.status(401).json({ error: 'user session missing' })
   }
 
   next()
 }
 
-const userIsOwner = async (req, res, next) => {
-  if (req.body.userId !== req.product.productSellerId) {
-    return res.status(400).send({ error: 'user does not own this product' })
+const productFinder = async (req, res, next) => {
+  req.product = await Product.findByPk(req.params.id)
+  if (!req.product) {
+    return res.status(400).send({ error: 'product does not exist' })
   }
   next()
 }
 
-const productFinder = async (req, res, next) => {
-  req.product = await Product.findByPk(req.params.id)
+const userIsOwner = async (req, res, next) => {
+  if (req.body.userId !== req.product.sellerId) {
+    return res.status(400).send({ error: 'user does not own this product' })
+  }
   next()
 }
 
@@ -85,6 +88,6 @@ module.exports = {
   errorHandler,
   tokenIsValid,
   sessionIsValid,
-  userIsOwner,
   productFinder,
+  userIsOwner,
 }

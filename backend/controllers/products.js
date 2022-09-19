@@ -22,12 +22,12 @@ router.post('/', tokenIsValid, sessionIsValid, async (req, res) => {
   const body = req.body
   const user = await User.findByPk(body.userId)
 
-  if (user.userRole === 'seller') {
+  if (user.role === 'seller') {
     const product = new Product({
-      productSellerId: req.decodedToken.id,
-      productName: body.name,
-      productAmountAvailable: body.amountAvailable,
-      productCost: body.cost,
+      sellerId: req.decodedToken.id,
+      name: body.name,
+      amountAvailable: body.amountAvailable,
+      cost: body.cost,
     })
 
     const savedProduct = await product.save()
@@ -38,15 +38,15 @@ router.post('/', tokenIsValid, sessionIsValid, async (req, res) => {
 })
 
 router.put('/:id', tokenIsValid, sessionIsValid, productFinder, userIsOwner, async (req, res) => {
-  const b = req.body
-  const p = req.product
+  const body = req.body
+  const product = req.product
 
-  if (p) {
-    b.name ? (p.productName = b.name) : null
-    b.amountAvailable ? (p.amountAvailable = b.amountAvailable) : null
-    b.cost ? (p.productCost = b.cost) : null
-    await p.save()
-    res.json(p)
+  if (product) {
+    body.name ? (product.name = body.name) : null
+    body.amountAvailable ? (product.amountAvailable = body.amountAvailable) : null
+    body.cost ? (product.cost = body.cost) : null
+    await product.save()
+    res.json(product)
   } else {
     res.status(404).end()
   }
@@ -56,7 +56,7 @@ router.delete('/:id', tokenIsValid, sessionIsValid, productFinder, userIsOwner, 
   let name = null
 
   if (req.product) {
-    name = req.product.productName
+    name = req.product.name
     await req.product.destroy()
   }
 
