@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap');
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    background: #333;
+    color: white;
+    font-family: "Montserrat", "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+#root {
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+    border: 2px solid white;
+    padding: 1em;
+    width: 90%;
+    height: 90%;
+    max-width: 1000px;
+    max-height: 1000px;
+}
+
+div#madewithlove {
+    position: absolute;
+    bottom: 5%;
+    letter-spacing: -1px;
+}
+
+header {
+    height: 10%
+}
+
+main {
+    height: 72%;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    overflow-y: auto;
+    word-break: break-all;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+main::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}
+
+footer {
+    height: 18%
+}
+
+footer img {
+    padding-top: 2vh;
+    max-width: 30px
+}
+
+a#logout {
+    border-bottom: 1px solid #04a9f4;
+}
+
+a#logout:hover {
+    border-bottom: 1px solid yellow;
+}

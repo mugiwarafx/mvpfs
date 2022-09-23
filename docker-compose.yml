@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: mvpfs-frontend
+    build: ./frontend/
+    container_name: mvpfs-frontend
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - backend
+
+  backend:
+    image: mvpfs-backend
+    build: ./backend/
+    container_name: mvpfs-backend
+    ports: 
+      - "5000:5000"
+
+# create a volume if you would like to persist data

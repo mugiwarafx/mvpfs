@@ -6,10 +6,9 @@ const Product = require('../models/product')
 
 const { tokenIsValid, sessionIsValid } = require('../utils/middleware')
 
-router.get('/:id', tokenIsValid, sessionIsValid, async (req, res) => {
-  const user = await User.findByPk(req.params.id)
-  if (user) {
-    res.json(user)
+router.get('/profile', tokenIsValid, sessionIsValid, async (req, res) => {
+  if (req.loggedInUser) {
+    res.json(req.loggedInUser)
   } else {
     res.status(404).end()
   }

@@ -5,6 +5,7 @@ const SECRET = process.env.SECRET
 
 const Session = require('../models/session')
 const Product = require('../models/product')
+const User = require('../models/user')
 
 const tokenIsValid = async (req, res, next) => {
   const authorization = req.get('authorization')
@@ -41,10 +42,15 @@ const sessionIsValid = async (req, res, next) => {
     id = parseInt(req.params.id)
   }
 
+  if (req.originalUrl === '/api/users/profile') {
+    id = session.userId
+  }
+
   if (id !== session.userId) {
     return res.status(401).json({ error: 'user session missing' })
   }
 
+  req.loggedInUser = await User.findByPk(id)
   next()
 }
 

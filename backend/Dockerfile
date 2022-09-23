@@ -10,4 +10,6 @@ ENV DEBUG=playground:*
 
 USER node
 
+EXPOSE 5000
+
 CMD npm start

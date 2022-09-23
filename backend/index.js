@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 // require('express-async-errors') [unmantained]
-
 const middleware = require('./utils/middleware')
 const { PORT } = require('./utils/config')
 const { connectToDatabase } = require('./utils/db')
@@ -13,6 +13,7 @@ const logoutRouter = require('./controllers/logout')
 
 module.exports = app
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/api/users', usersRouter)
